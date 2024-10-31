@@ -27,6 +27,9 @@ def error_handle(func):
 @app.route("/prepare", methods=["POST"])
 @error_handle
 def post_prepare():
+    print(request.data)
+    print(request.content_type)
+    print(request.is_json)
     json_data = request.get_json(force=True)
 
     user = api.use(json_data.pop("broker"))

@@ -88,6 +88,7 @@ class ClientTrader(IClientTrader):
         self._app = None
         self._main = None
         self._toolbar = None
+        self._editor_need_type_keys = True
 
     @property
     def app(self):
@@ -448,8 +449,11 @@ class ClientTrader(IClientTrader):
 
     def _set_trade_params(self, security, price, amount):
         code = security[-6:]
+        print(security)
+        print(code)
 
         self._type_edit_control_keys(self._config.TRADE_SECURITY_CONTROL_ID, code)
+        print(code)
 
         # wait security input finish
         self.wait(0.1)
@@ -495,11 +499,14 @@ class ClientTrader(IClientTrader):
         )
 
     def _type_edit_control_keys(self, control_id, text):
+        print("text=%s"%text)
         if not self._editor_need_type_keys:
+            print("not type_keys")
             self._main.child_window(
                 control_id=control_id, class_name="Edit"
             ).set_edit_text(text)
         else:
+            print("type_keys")
             editor = self._main.child_window(control_id=control_id, class_name="Edit")
             editor.select()
             editor.type_keys(text)
