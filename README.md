@@ -2,6 +2,7 @@
 
 二、安装
 pip install -r requirements.txt
+
 pip install pywin32
 
 三、安装同花顺软件
